@@ -1,0 +1,15 @@
+# Ignore build output
+build/
+
+# VSCode settings (optional, if you don't want to share workspace configs)
+.vscode/
+
+# OS files
+.DS_Store
+
+# Compiled binaries (general)
+*.out
+*.exe
+
+# Backup files
+*~
