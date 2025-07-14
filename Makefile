@@ -3,7 +3,7 @@ COMPILER = clang++
 COMPILER_FLAGS = -std=c++17 -Wall
 
 # Directories
-INCLUDE_DIR = -Idata_structures/linked_list
+INCLUDE_DIR = -Idata_structures/linked_list -Idata_structures/stack
 
 # this for scaling up in future
 # INCLUDE_DIRS = -Idata_structures/linked_list -Idata_structures/trees -Idata_structures/graphs  
