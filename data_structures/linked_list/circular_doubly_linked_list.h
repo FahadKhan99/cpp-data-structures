@@ -1,5 +1,5 @@
-#ifndef CIRCULAR_LINKED_LIST_H
-#define CIRCULAR_LINKED_LIST_H
+#ifndef CIRCULAR_DOUBLY_LINKED_LIST_H
+#define CIRCULAR_DOUBLY_LINKED_LIST_H
 
 #include <iostream>
 using namespace std;
