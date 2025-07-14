@@ -26,6 +26,72 @@ public:
     size = 1;
   }
 
+  // copy constructor
+  LinkedListStack(const LinkedListStack &other)
+  {
+    top = nullptr;
+    Node *curr = other.top;
+    size = other.size;
+    Node *tail = nullptr; // need to copy it properly, without you will copy in reverse order.
+
+    while (curr)
+    {
+      Node *newNode = new Node(curr->data);
+
+      if (!top)
+      {
+        top = newNode;
+        tail = newNode;
+      }
+      else
+      {
+        tail->next = newNode;
+        tail = newNode;
+      }
+
+      curr = curr->next;
+    }
+  }
+
+  // copy assignment operator
+  LinkedListStack &operator=(const LinkedListStack &other)
+  {
+    if (this == &other)
+      return *this;
+
+    clear(); // delete current nodes
+
+    Node *curr = other.top;
+    size = other.size;
+    Node *tail = nullptr;
+
+    while (curr)
+    {
+      Node *newNode = new Node(curr->data);
+      if (!top)
+      {
+        top = newNode;
+        tail = top;
+      }
+      else
+      {
+        tail->next = newNode;
+        tail = newNode;
+      }
+      curr = curr->next;
+    }
+    return *this;
+  }
+
+  // Move constructor
+  LinkedListStack(LinkedListStack &&other)
+  {
+    top = other.top;     // steal other's chain
+    size = other.size; 
+    other.size = 0;
+    other.top = nullptr; // empty out other
+  }
+
   void push(int data)
   {
     Node *newNode = new Node(data);
@@ -54,7 +120,7 @@ public:
   {
     if (isEmpty())
     {
-      cout << "Stack Underdflow!" << endl;
+      cout << "Stack Underflow!" << endl;
       return -1;
     }
 
