@@ -1,23 +1,21 @@
-#include "deque.h"
+#include "priority_queue_list.h"
+#include <string>
 
-int main() {
-    Deque<int> dq;
+int main()
+{
+  PriorityQueue<std::string> pq;
 
-    dq.insertFront(10);
-    dq.insertRear(20);
-    dq.insertFront(5);
-    dq.insertRear(25);
+  pq.enqueue("eat", 2);
+  pq.enqueue("code", 5);
+  pq.enqueue("sleep", 3);
 
-    dq.displayForward();   // 5 10 20 25
-    dq.displayBackward();  // 25 20 10 5
+  pq.print(); // Print raw contents
 
-    std::cout << "Front: " << dq.getFront() << std::endl;  // 5
-    std::cout << "Rear: " << dq.getRear() << std::endl;    // 25
+  std::cout << "Peek: " << pq.peek() << "\n";
 
-    dq.deleteFront();
-    dq.deleteRear();
+  std::cout << "Dequeued: " << pq.dequeue() << "\n";
+  std::cout << "Dequeued: " << pq.dequeue() << "\n";
+  std::cout << "Dequeued: " << pq.dequeue() << "\n";
 
-    dq.displayForward();   // 10 20
-
-    return 0;
+  return 0;
 }
