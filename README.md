@@ -11,15 +11,30 @@ This repository contains clear, beginner-friendly implementations of **Core Data
 
 ```
 C++/
-├── .vscode/                     # Local editor settings (optional, git-ignored)
-├── build/                       # Compiled binaries (git-ignored)
-├── build/                       # Compiled binaries (git-ignored)
-├── data_structures/linked_list/
-│   ├── singly_linked_list.h     # Singly Linked List implementation
-│   ├── doubly_linked_list.h     # Doubly Linked List implementation
-├── main.cpp                     # Example usage and testing
-├── Makefile                     # Simple build script
-├── .gitignore                   # Ignore build output & local configs
+├── .vscode/                         # Local editor settings (optional, git-ignored)
+├── build/                           # Compiled binaries (git-ignored)
+├── data_structures/
+│   ├── binary_tree/
+│   │   └── binary_tree.h            # Binary Tree / Binary Search Tree implementation
+│   ├── linked_list/
+│   │   ├── singly_linked_list.h     # Singly Linked List
+│   │   ├── doubly_linked_list.h     # Doubly Linked List
+│   │   ├── circular_doubly_linked_list.h  # Circular Doubly Linked List
+│   │   └── README.md                # Linked List notes and explanations
+│   ├── priority_queue/
+│   │   ├── priority_queue_heap.h    # Priority Queue using Heap
+│   │   └── priority_queue_list.h    # Priority Queue using Linked List
+│   ├── queue/
+│   │   ├── array_queue.h            # Queue using array
+│   │   ├── linked_list_queue.h      # Queue using linked list
+│   │   └── deque.h                  # Double-ended queue
+│   └── stack/
+│       ├── array_stack.h            # Stack using array
+│       └── linked_list_stack.h      # Stack using linked list
+├── main.cpp                         # Example usage and testing
+├── Makefile                         # Simple build script
+├── .gitignore                       # Ignore build output & local configs
+
 ```
 
 ---
