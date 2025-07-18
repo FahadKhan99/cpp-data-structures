@@ -1,20 +1,17 @@
-#include "priority_queue_heap.h"
-#include <string>
+#include "binary_tree.h"
 
 int main()
 {
-  PriorityQueue<std::string> pq;
-  pq.enqueue("Low", 1);
-  pq.enqueue("Medium", 5);
-  pq.enqueue("High", 10);
-  pq.enqueue("Top", 15);
+  BinaryTree<int> tree;
 
-  pq.print();
+  tree.insert(10);
+  tree.insert(5);
+  tree.insert(20);
+  tree.insert(15);
+  tree.insert(25);
 
-  std::cout << "Peek: " << pq.peek() << "\n";
+  tree.printInOrder(); // Output: 5 10 15 20 25
+  std::cout << "Total Nodes: " << tree.length() << "\n";
 
-  while (!pq.isEmpty())
-  {
-    std::cout << "Dequeued: " << pq.dequeue() << "\n";
-  }
+  return 0;
 }
