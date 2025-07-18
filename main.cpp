@@ -1,21 +1,20 @@
-#include "priority_queue_list.h"
+#include "priority_queue_heap.h"
 #include <string>
 
 int main()
 {
   PriorityQueue<std::string> pq;
+  pq.enqueue("Low", 1);
+  pq.enqueue("Medium", 5);
+  pq.enqueue("High", 10);
+  pq.enqueue("Top", 15);
 
-  pq.enqueue("eat", 2);
-  pq.enqueue("code", 5);
-  pq.enqueue("sleep", 3);
-
-  pq.print(); // Print raw contents
+  pq.print();
 
   std::cout << "Peek: " << pq.peek() << "\n";
 
-  std::cout << "Dequeued: " << pq.dequeue() << "\n";
-  std::cout << "Dequeued: " << pq.dequeue() << "\n";
-  std::cout << "Dequeued: " << pq.dequeue() << "\n";
-
-  return 0;
+  while (!pq.isEmpty())
+  {
+    std::cout << "Dequeued: " << pq.dequeue() << "\n";
+  }
 }
