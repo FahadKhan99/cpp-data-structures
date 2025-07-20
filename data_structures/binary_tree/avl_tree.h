@@ -126,6 +126,63 @@ private:
     inorderHelper(node->right);
   }
 
+  Node* minValueNode(Node* node) const
+  {
+    Node* curr = node;
+    while (curr && curr->left)
+    {
+      curr = curr->left.get();
+    }
+    return curr;
+  }
+
+  void removeHelper(std::unique_ptr<Node> &node, const T &key)
+  {
+    if (!node)
+      return;
+
+    if (key < node->data)
+    {
+      removeHelper(node->left, key);
+    }
+    else if (key > node->data)
+    {
+      removeHelper(node->right, key);
+    }
+    else
+    {
+      // Node found
+      if (!node->left || !node->right)
+      {
+        node = std::move(node->left ? node->left : node->right);
+      }
+      else
+      {
+        // if both child exists
+        Node *successor = minValueNode(node->right.get());
+        node->data = successor->data;
+        removeHelper(node->right, successor->data);
+      }
+    }
+
+    if (node)
+    {
+      balance(std::move(node));
+    }
+  }
+
+  bool containsHelper(const std::unique_ptr<Node> &node, const T &key) const
+  {
+    if (!node)
+      return false;
+
+    if (key < node->data)
+      return containsHelper(node->left, key);
+    else if (key > node->data)
+      return containsHelper(node->right, key);
+    return true;
+  }
+
 public:
   AVLTree() = default;
   ~AVLTree() = default;
@@ -147,6 +204,37 @@ public:
   {
     inorderHelper(root);
     std::cout << '\n';
+  }
+
+  void remove(const T &key)
+  {
+    removeHelper(root, key);
+  }
+
+  // Utility functions
+  bool contains(const T &key) const
+  {
+    return containsHelper(root, key);
+  }
+
+  const T *min() const
+  {
+    Node *curr = root.get();
+    if (!curr)
+      return nullptr;
+    while (curr->left)
+      curr = curr->left.get();
+    return &curr->data;
+  }
+
+  const T *max() const
+  {
+    Node *curr = root.get();
+    if (!curr)
+      return nullptr;
+    while (curr->right)
+      curr = curr->right.get();
+    return &curr->data;
   }
 };
 
