@@ -12,6 +12,8 @@
 */
 
 #include <iostream>
+#include <vector>
+#include <string>
 
 class Trie
 {
@@ -187,6 +189,51 @@ public:
       }
     }
     curr->deleteEnd();
+  }
+
+  bool checkIfPrefixExists(std::string word)
+  {
+    Node *curr = root;
+    for (int i = 0; i < word.length(); i++)
+    {
+      if (curr->containsKey(word[i]))
+      {
+        curr = curr->getNext(word[i]);
+        if (!curr->isEnd())
+          return false;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  // longest word
+  std::string completeString(std::vector<std::string> &wordList)
+  {
+    std::string longest = "";
+
+    for (auto &word : wordList)
+    {
+      if (checkIfPrefixExists(word))
+      {
+        if (word.length() > longest.length())
+        {
+          longest = word;
+        }
+        else if (word.length() == longest.length() && word < longest)
+        {
+          longest = word;
+        }
+      }
+    }
+
+    if (longest == "")
+      return "None";
+    return longest;
   }
 };
 

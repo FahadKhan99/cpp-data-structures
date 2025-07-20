@@ -1,57 +1,41 @@
-#include "trie.h"
 #include <iostream>
+#include <vector>
+#include "trie.h" // Make sure this has the Trie and Node class definitions
 
 int main()
 {
   Trie trie;
 
-  // Insert words
-  trie.insert("apple");
-  trie.insert("app");
-  trie.insert("app");
-  trie.insert("apex");
-  trie.insert("bat");
-  trie.insert("batman");
+  std::vector<std::string> words1 = {"n", "ni", "nin", "ninj", "ninja", "ninga"};
+  std::vector<std::string> words2 = {"a", "ab", "abc", "abcd"};
+  std::vector<std::string> words3 = {"a", "banana", "app", "appl", "ap", "apply", "apple"};
+  std::vector<std::string> words4 = {"k", "ki", "kin", "king", "kingd", "kingdo", "kingdom"};
+  std::vector<std::string> words5 = {"a", "ab", "abc", "abd", "abcd"};
 
-  // Test search
-  std::cout << "Search 'apple': " << trie.search("apple") << "\n";   // true
-  std::cout << "Search 'app': " << trie.search("app") << "\n";       // true
-  std::cout << "Search 'apex': " << trie.search("apex") << "\n";     // true
-  std::cout << "Search 'bat': " << trie.search("bat") << "\n";       // true
-  std::cout << "Search 'batman': " << trie.search("batman") << "\n"; // true
-  std::cout << "Search 'bats': " << trie.search("bats") << "\n\n";     // false
+  auto test = [&](const std::vector<std::string> &wordList)
+  {
+    Trie temp;
+    for (const auto &word : wordList)
+    {
+      temp.insert(word);
+    }
+    std::cout << "Longest complete string in list: " << temp.completeString(const_cast<std::vector<std::string> &>(wordList)) << "\n\n";
+  };
 
-  // Test startsWith
-  std::cout << "StartsWith 'ap': " << trie.startsWith("ap") << "\n";     // true
-  std::cout << "StartsWith 'batm': " << trie.startsWith("batm") << "\n"; // true
-  std::cout << "StartsWith 'bad': " << trie.startsWith("bad") << "\n\n";   // false
+  std::cout << "Test Case 1:\n";
+  test(words1); // Expected: "ninja"
 
-  // Test countWordsEqualTo
-  std::string word1 = "app";
-  std::string word2 = "apple";
-  std::cout << "Count 'app': " << trie.countWordsEqualTo(word1) << "\n";   // 2
-  std::cout << "Count 'apple': " << trie.countWordsEqualTo(word2) << "\n\n"; // 1
+  std::cout << "Test Case 2:\n";
+  test(words2); // Expected: "abcd"
 
-  // Test countWordsStartingWith
-  std::string prefix1 = "ap";
-  std::string prefix2 = "bat";
-  std::string prefix3 = "b";
-  std::cout << "Count prefix 'ap': " << trie.countWordsStartingWith(prefix1) << "\n";  // 4
-  std::cout << "Count prefix 'bat': " << trie.countWordsStartingWith(prefix2) << "\n"; // 2
-  std::cout << "Count prefix 'b': " << trie.countWordsStartingWith(prefix3) << "\n\n";   // 2
+  std::cout << "Test Case 3:\n";
+  test(words3); // Expected: "apple"
 
-  // Test erase
-  trie.erase(word1); // erase one "app"
-  std::cout << "After erase 'app':\n";
-  std::cout << "Search 'app': " << trie.search("app") << "\n";                        // true
-  std::cout << "Count 'app': " << trie.countWordsEqualTo(word1) << "\n";              // 1
-  std::cout << "Count prefix 'ap': " << trie.countWordsStartingWith(prefix1) << "\n\n"; // 3
+  std::cout << "Test Case 4:\n";
+  test(words4); // Expected: "kingdom"
 
-  trie.erase(word1); // erase another "app"
-  std::cout << "After second erase 'app':\n";
-  std::cout << "Search 'app': " << trie.search("app") << "\n";                        // false
-  std::cout << "Count 'app': " << trie.countWordsEqualTo(word1) << "\n";              // 0
-  std::cout << "Count prefix 'ap': " << trie.countWordsStartingWith(prefix1) << "\n\n"; // 2
+  std::cout << "Test Case 5:\n";
+  test(words5); // Expected: "abcd"
 
   return 0;
 }
