@@ -20,6 +20,8 @@ private:
   {
     Node *links[26]; // a - z
     bool flag = false;
+    int countEndWith = 0;
+    int countPrefix = 0;
 
     // checks if reference exists
     bool containsKey(char ch)
@@ -46,6 +48,38 @@ private:
     {
       return flag;
     }
+
+    // new helper for these
+
+    void increaseEnd()
+    {
+      countEndWith++;
+    }
+
+    void increasePrefix()
+    {
+      countPrefix++;
+    }
+
+    void deleteEnd()
+    {
+      countEndWith--;
+    }
+
+    void reducePrefix()
+    {
+      countPrefix--;
+    }
+
+    int getEnd()
+    {
+      return countEndWith;
+    }
+
+    int getPrefix()
+    {
+      return countPrefix;
+    }
   };
   Node *root;
 
@@ -66,8 +100,10 @@ public:
       }
       // move to the reference
       curr = curr->getNext(word[i]);
+      curr->increasePrefix();
     }
     curr->setEnd();
+    curr->increaseEnd();
   }
 
   std::string search(std::string word)
@@ -99,6 +135,58 @@ public:
       curr = curr->getNext(prefix[i]);
     }
     return "true";
+  }
+
+  int countWordsEqualTo(std::string &word)
+  {
+    Node *curr = root;
+    for (int i = 0; i < word.length(); i++)
+    {
+      if (curr->containsKey(word[i]))
+      {
+        curr = curr->getNext(word[i]);
+      }
+      else
+      {
+        return 0;
+      }
+    }
+    return curr->getEnd();
+  }
+
+  int countWordsStartingWith(std::string &word)
+  {
+    Node *curr = root;
+    for (int i = 0; i < word.length(); i++)
+    {
+      if (curr->containsKey(word[i]))
+      {
+        curr = curr->getNext(word[i]);
+      }
+      else
+      {
+        return 0;
+      }
+    }
+    return curr->getPrefix();
+  }
+
+  void erase(std::string &word)
+  {
+    Node *curr = root;
+    for (int i = 0; i < word.length(); i++)
+    {
+      if (curr->containsKey(word[i]))
+      {
+        curr = curr->getNext(word[i]);
+        curr->reducePrefix();
+      }
+      else
+      {
+        return;
+      }
+    }
+    curr->deleteEnd();
   }
 };
 
