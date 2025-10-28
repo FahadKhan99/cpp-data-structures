@@ -211,7 +211,7 @@ public:
     return true;
   }
 
-  // longest word
+  // Longest Word with All Prefixes Present in the List
   std::string completeString(std::vector<std::string> &wordList)
   {
     std::string longest = "";

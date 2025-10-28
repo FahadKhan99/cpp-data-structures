@@ -1,41 +1,54 @@
 #include <iostream>
-#include <vector>
-#include "trie.h" // Make sure this has the Trie and Node class definitions
+#include <cmath>
+#include <unistd.h> // For usleep on mac devices
+
+using namespace std;
 
 int main()
 {
-  Trie trie;
+  float A = 0, B = 0, i, j;
+  float z[1760];
+  char b[1760];
+  cout << "\x1b[2J"; // Clear screen
 
-  std::vector<std::string> words1 = {"n", "ni", "nin", "ninj", "ninja", "ninga"};
-  std::vector<std::string> words2 = {"a", "ab", "abc", "abcd"};
-  std::vector<std::string> words3 = {"a", "banana", "app", "appl", "ap", "apply", "apple"};
-  std::vector<std::string> words4 = {"k", "ki", "kin", "king", "kingd", "kingdo", "kingdom"};
-  std::vector<std::string> words5 = {"a", "ab", "abc", "abd", "abcd"};
-
-  auto test = [&](const std::vector<std::string> &wordList)
+  while (true)
   {
-    Trie temp;
-    for (const auto &word : wordList)
+    fill(begin(b), end(b), ' ');
+    fill(begin(z), end(z), 0);
+    for (j = 0; j < 6.28; j += 0.07)
     {
-      temp.insert(word);
+      for (i = 0; i < 6.28; i += 0.02)
+      {
+        float c = sin(i);
+        float d = cos(j);
+        float e = sin(A);
+        float f = sin(j);
+        float g = cos(A);
+        float h = d + 2;
+        float D = 1 / (c * h * e + f * g + 5);
+        float l = cos(i);
+        float m = cos(B);
+        float n = sin(B);
+        float t = c * h * g - f * e;
+        int x = 40 + 30 * D * (l * h * m - t * n);
+        int y = 12 + 15 * D * (l * h * n + t * m);
+        int o = x + 80 * y;
+        int N = 8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n);
+        if (y < 22 && y >= 0 && x >= 0 && x < 80 && D > z[o])
+        {
+          z[o] = D;
+          b[o] = ".,-~:;=!*#$@"[N > 0 ? N : 0];
+        }
+      }
     }
-    std::cout << "Longest complete string in list: " << temp.completeString(const_cast<std::vector<std::string> &>(wordList)) << "\n\n";
-  };
-
-  std::cout << "Test Case 1:\n";
-  test(words1); // Expected: "ninja"
-
-  std::cout << "Test Case 2:\n";
-  test(words2); // Expected: "abcd"
-
-  std::cout << "Test Case 3:\n";
-  test(words3); // Expected: "apple"
-
-  std::cout << "Test Case 4:\n";
-  test(words4); // Expected: "kingdom"
-
-  std::cout << "Test Case 5:\n";
-  test(words5); // Expected: "abcd"
-
+    cout << "\x1b[H"; // Move cursor to home position
+    for (int k = 0; k < 1760; k++)
+    {
+      cout << (k % 80 ? b[k] : '\n');
+    }
+    A += 0.04;
+    B += 0.02;
+    usleep(30000); // 30ms delay → **inside main()**
+  }
   return 0;
 }
